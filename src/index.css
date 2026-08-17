@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background-color: #12161c;
+    color: #edeef0;
+    font-family: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #e8a33d;
+    color: #12161c;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1b212b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2c3444;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a4556;
+  }
+}
+
+/* Weight-specific font stacks, mirroring the mobile font tokens exactly.
+   Kept unlayered so they win over Tailwind's generated utilities. */
+.font-sans {
+  font-family: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+}
+.font-sans-medium {
+  font-family: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+}
+.font-sans-semibold {
+  font-family: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+}
+.font-display {
+  font-family: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+}
+.font-mono {
+  font-family: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+}
+.font-mono-medium {
+  font-family: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+}
+.font-mono-semibold {
+  font-family: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+}
+
+/* Signature device-state animations (mirrors the mobile DeviceMarker spec):
+   ON = slow soft expanding pulse, ERROR = fast irregular flicker. */
+@keyframes device-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.05);
+    opacity: 0;
+  }
+}
+
+@keyframes device-flicker {
+  0% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.35;
+  }
+  32% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 0.5;
+  }
+  68% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.device-pulse {
+  animation: device-pulse 2.2s ease-out infinite;
+}
+
+.device-flicker {
+  animation: device-flicker 0.74s linear infinite;
+}
+
+.toast-in {
+  animation: toast-in 0.26s ease-out both;
+}
+
+.fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+/* Loading skeleton: surface-colored block with a subtle surface-raised shimmer.
+   Mirrors the mobile shimmer and stays inside the design tokens. */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: #1b212b;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(35, 43, 56, 0.85), transparent);
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
